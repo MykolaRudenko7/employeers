@@ -5,7 +5,7 @@ import './employeers-list-item.css'
 const EmployeersListItem = () => {
   return (
     <li className="list-group-item d-flex justify-content-between">
-      <span className="list-group-item-label">John Smith</span>
+      <span className="list-group-item-label">Іван Іванович</span>
       <input
         type="text"
         className="list-group-item-input"
