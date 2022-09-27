@@ -7,7 +7,7 @@ class EmployeersListItem extends Component {
     // стан
     this.state = {
       increase: false,
-		// 1 стан 'лайк'
+      // 1 стан 'лайк'
       like: false,
     };
   }
@@ -22,10 +22,10 @@ class EmployeersListItem extends Component {
     }));
   };
 
-// 2
+  // 2
   onLike = () => {
     this.setState(({ like }) => ({
-		// якщо клацнем, то буде тру
+      // якщо клацнем, то буде тру
       like: !like,
     }));
   };
@@ -39,17 +39,21 @@ class EmployeersListItem extends Component {
     if (increase) {
       classNames += " increase";
     }
-	//  якщо ллайк буде фалс- класу не буде
-	// якщо тру, то дабавляю
+    //  якщо ллайк буде фалс- класу не буде
+    // якщо тру, то дабавляю
     if (like) {
       classNames += " like";
     }
 
     return (
       <li className={classNames}>
-        <span className="list-group-item-label" 
-		// якщо клік на ім'я, то визиваю ф-цію 
-		  onClick={this.onLike}>{name}</span>
+        <span
+          className="list-group-item-label"
+          // якщо клік на ім'я, то визиваю ф-цію
+          onClick={this.onLike}
+        >
+          {name}
+        </span>
         <input
           type="text"
           className="list-group-item-input"
