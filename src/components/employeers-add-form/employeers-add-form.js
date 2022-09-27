@@ -20,13 +20,41 @@ class EmployeersAddForm extends Component {
     });
   };
 
+  //
+  //
+  //
+  // метод бере подію надсилання
+  //   onSubmit = (e) => {
+  //     // відміняю перезагрузку
+  //     e.preventDefault();
+  // 	// з пропсів у ф-цію конструктор передаю властивості - ім"я і зп що введені в стані
+  //     this.props.onAdd(this.state.name, this.state.salary);
+  // 	//  і записую знову пусті рядки
+  //     this.setState({
+  //       name: "",
+  //       salary: "",
+  //     });
+  //   };
+  //
+  //
+  //
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.props.onAdd(this.state.name, this.state.salary);
+    this.setState({
+      name: "",
+      salary: "",
+    });
+  };
+
   render() {
     const { name, salary } = this.state;
 
     return (
       <div className="app-add-form">
         <h3>Додати нового працівника</h3>
-        <form className="add-form d-flex">
+        {/* передаю пропом ф-цію надсиллання на форму*/}
+        <form className="add-form d-flex" onSubmit={this.onSubmit}>
           <input
             type="text"
             className="form-control new-post-label"
@@ -49,7 +77,6 @@ class EmployeersAddForm extends Component {
             value={salary}
             onChange={this.onValueChange}
           />
-
           <button type="submit" className="btn btn-outline-light">
             Додати
           </button>
