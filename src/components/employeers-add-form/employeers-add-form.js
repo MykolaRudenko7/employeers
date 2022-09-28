@@ -23,29 +23,21 @@ class EmployeersAddForm extends Component {
   //
   //
   //
-  // метод бере подію надсилання
-  //   onSubmit = (e) => {
-  //     // відміняю перезагрузку
-  //     e.preventDefault();
-  // 	// з пропсів у ф-цію конструктор передаю властивості - ім"я і зп що введені в стані
-  //     this.props.onAdd(this.state.name, this.state.salary);
-  // 	//  і записую знову пусті рядки
-  //     this.setState({
-  //       name: "",
-  //       salary: "",
-  //     });
-  //   };
-  //
-  //
-  //
+  //   метод бере подію надсилання
   onSubmit = (e) => {
+    // відміняю перезагрузку
     e.preventDefault();
+    // з пропсів у ф-цію конструктор передаю властивості - ім"я і зп що введені в стані
     this.props.onAdd(this.state.name, this.state.salary);
+    //  і записую знову пусті рядки
     this.setState({
       name: "",
       salary: "",
     });
   };
+  //
+  //
+  //
 
   render() {
     const { name, salary } = this.state;
