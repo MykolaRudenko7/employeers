@@ -5,18 +5,20 @@ const AppFilter = (props) => {
   // підхід із масивом кнопок
   // нейм - це строчки в фільтрі
   const butonsData = [
-    { name: "all", label: "Всі працівники" },
-    { name: "rise", label: "На підвищення" },
-    { name: "more", label: "З/п більше 10000 грн" },
+    { name: "all", label: "Всі працівники", colored: false },
+    { name: "rise", label: "На підвищення", colored: false },
+    { name: "more", label: "З/п більше 10000 грн", colored: true },
   ];
   //  в новий масив формую кнопку
-  const buttons = butonsData.map(({ name, label }) => {
+  const buttons = butonsData.map(({ name, label, colored }) => {
     // пропс я передав в апп (фільтр)
     // перемінна матиме тру )якщо ім'я з фільтру (апп) співпадаттиме з тим що у масиві кнопок) чи фалс
     const active = props.filter === name;
 
     //  клас активний на кнопку
     const clazz = active ? "btn-light" : "btn-outline-light";
+    //  динамічний стиль (з обєскта беру тру чи фалс і в залежності від цього міняю стиль кнопки)
+    const style = colored ? { color: "yellow" } : null;
 
     return (
       <button
@@ -24,6 +26,8 @@ const AppFilter = (props) => {
         type="button"
         key={name}
         onClick={() => props.onFilterSelect(name)}
+        //   динамічний стиль
+        style={style}
       >
         {label}
       </button>
