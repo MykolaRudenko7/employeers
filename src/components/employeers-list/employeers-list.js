@@ -3,7 +3,7 @@ import "./employeers-list.css";
 //
 //
 //
-// витягую цю ф-цію
+// тут я уже показую відфільтровану дату
 const EmployeersList = ({ data, onDelete, onToggleProp }) => {
   const elements = data.map((item) => {
     // деструктуризація, витягую id, потім все остальне в itemProps
@@ -14,9 +14,6 @@ const EmployeersList = ({ data, onDelete, onToggleProp }) => {
         {...itemProps}
         //   видаляю елемент по айді
         onDelete={() => onDelete(id)}
-        //
-        //
-        //
         //   тут при події визиваю ф-цію і передаю в неї айді нажатого елементу і значення атрибуту у об'єкту події (проп зі значенням властивості у даті)
         onToggleProp={(e) =>
           onToggleProp(id, e.currentTarget.getAttribute("data-toggle"))

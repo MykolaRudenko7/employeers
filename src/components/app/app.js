@@ -11,8 +11,8 @@ import "./app.css";
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      // щоб оновлювалось
       data: [
         {
           name: "Григорій Сковорода",
@@ -36,6 +36,10 @@ class App extends Component {
           id: 3,
         },
       ],
+      // кусок строки з пошуку по імені
+      term: "",
+      // тут буде вибраний фільтр
+      filter: "",
     };
     this.maxId = 4;
   }
@@ -70,58 +74,8 @@ class App extends Component {
           data: newArr,
         };
       });
-    } 
+    }
   };
-
-  //   onToggleIncrease = (id) => {
-  //     // 1
-  //     //  this.setState(({ data }) => {
-  //     // // отрим індекс елементу з яким працюю
-  //     // const index = data.findIndex((elem) => elem.id === id);
-  //     // // в старих даних цей об'єкт
-  //     // const old = data[index];
-  //     // // ! новий синтаксис дані розвернуться і сформують новий об'єкт, і додою нові властивості, якщо вони будуть співпадати з старими, то замінять їх
-  //     // // бере значення і записує його на протилежне
-  //     // const newItem = { ...old, increase: !old.increase };
-  //     // const newArr = [
-  //     //   ...data.slice(0, index),
-  //     //   newItem,
-  //     //   ...data.slice(index + 1),
-  //     // ];
-  //     // return {
-  //     //   data: newArr,
-  //     // };
-  //     //  });
-
-  //     //  2
-  //     this.setState(({ data }) => ({
-  //       // map-ом повертаю новий об'єкт
-  //       data: data.map((item) => {
-  //         // якщо  айді елементу дорівнює наджтому айді
-  //         if (item.id === id) {
-  //           // повертаю всі ел так само, окрім премії
-  //           return { ...item, increase: !item.increase };
-  //         }
-  //         // якщо ні, то вертаю як було
-  //         return item;
-  //       }),
-  //     }));
-  //   };
-
-  //   onToggleRise = (id) => {
-  //     this.setState(({ data }) => ({
-  //       // map-ом повертаю новий об'єкт
-  //       data: data.map((item) => {
-  //         // якщо  айді елементу дорівнює наджтому айді
-  //         if (item.id === id) {
-  //           // повертаю всі ел так само, окрім премії
-  //           return { ...item, rise: !item.rise };
-  //         }
-  //         // якщо ні, то вертаю як було
-  //         return item;
-  //       }),
-  //     }));
-  //   };
   //  											uneversal
   //
   // ідентифікатор і що міняю
@@ -140,13 +94,59 @@ class App extends Component {
     }));
   };
 
+  //   передаю масив для фільтрування і строку (з куском імені)
+  serchEmp = (items, term) => {
+    // якщо строка не введена, повертаю той же масив
+    if (term.length === 0) {
+      return items;
+    }
+    //  якщо в масиві у елементу був знайдений кусок строки, то поветраєм той елемент(індекс де була знайдена підстрока), якщо нвчого, і якщо буде більше чим -1 (бо -1 це нічого)
+    return items.filter((item) => {
+      return item.name.indexOf(term) > -1;
+    });
+  };
+
+  //   метод жля установку куска строки
+  // приймає кусок строки і в стейті установлює його
+  onUpdateSearch = (term) => {
+    this.setState({ term: term });
+  };
+
+  //   фільтр
+  filterPost = (items, filter) => {
+    switch (filter) {
+      // підвищення
+      case "rise":
+        // премійовані об'єкти будуть включені в новиймасив
+        return items.filter((item) => item.rise === true);
+      // брейк в реакті не обов'язково
+      case "more":
+        return items.filter((item) => item.salary > 10000);
+      // якщо нічого не буде, повертаю масив як є
+      default:
+        return items;
+    }
+  };
+
+  //   змінюю в теперішньому стані фільтр
+  onFilterSelect = (filter) => {
+    // приходе строка фільтру і повертаєм її в стан
+    this.setState({ filter });
+  };
+
   render() {
+    // дані із стейту
+    const { data, term, filter } = this.state;
     // к-сть працівників
     const employeers = this.state.data.length;
     //  к-сть працівників, які отримають премію
     const increasedEmployeers = this.state.data.filter(
       (elem) => elem.increase
     ).length;
+
+    //  видимі данні - масив який виводим
+    //   масив, відфільтрований по строчці, яка нам приходить і заразом відфільтрований по зп і преміям
+    const visibleData = this.filterPost(this.serchEmp(data, term), filter);
 
     return (
       <div className="app">
@@ -155,16 +155,15 @@ class App extends Component {
           increasedEmployeers={increasedEmployeers}
         />
         <div className="searh-panel">
-          <SearchPanel />
-          <AppFilter />
+          <SearchPanel onUpdateSearch={this.onUpdateSearch} />
+
+          {/* передаю фільтр із стейту */}
+          <AppFilter filter={filter} onFilterSelect={this.onFilterSelect} />
         </div>
         <EmployeersList
-          // ! 'прокидую вниз' в ліст
-          data={this.state.data}
+          // масив, відфільтрований (тепер я в дату передаю відфільтрований масив, що підходить по кусочку імені )
+          data={visibleData}
           onDelete={this.deleteItem}
-          //
-          //
-          // кидаю ф-цію через проп в ліст
           onToggleProp={this.onToggleProp}
         />
         <EmployeersAddForm onAdd={this.addItem} />
@@ -172,5 +171,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
