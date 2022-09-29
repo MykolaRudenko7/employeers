@@ -1,14 +1,7 @@
 import "./employeers-list-item.scss";
 
 const EmployeersListItem = (props) => {
-  const {
-    name,
-    salary,
-    onDelete,
-    onToggleProp,
-    increase,
-    rise,
-  } = props;
+  const { name, salary, onDelete, onToggleProp, increase, rise } = props;
 
   let classNames = "list-group-item d-flex justify-content-between";
   if (increase) {
@@ -27,12 +20,11 @@ const EmployeersListItem = (props) => {
         // якщо клік на ім'я, то визиваю ф-цію
         onClick={onToggleProp}
         data-toggle="rise"
+        //   інлайн стилі приймають об'єкт
+        // якщо одиниця виміру без величини, то за замовчуванням px
+        //   style={{fontSize: 20}}
 
-		//   інлайн стилі приймають об'єкт
-		// якщо одиниця виміру без величини, то за замовчуванням px
-		//   style={{fontSize: 20}}
-
-		  style={{fontSize: '1rem'}}
+        style={{ fontSize: "1rem" }}
       >
         {name}
       </span>
@@ -46,7 +38,7 @@ const EmployeersListItem = (props) => {
           type="button"
           className="btn-cookie btn-sm "
           onClick={onToggleProp}
-			// в ліст я буду отримувати значення цього атрибуту
+          // в ліст я буду отримувати значення цього атрибуту
           data-toggle="increase"
         >
           <i className="fas fa-cookie"></i>

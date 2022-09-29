@@ -8,6 +8,10 @@ import EmployeersAddForm from "../employeers-add-form/employeers-add-form";
 
 import "./app.scss";
 
+//
+//
+//
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -76,8 +80,7 @@ class App extends Component {
       });
     }
   };
-  //  											uneversal
-  //
+
   // ідентифікатор і що міняю
   onToggleProp = (id, prop) => {
     this.setState(({ data }) => ({

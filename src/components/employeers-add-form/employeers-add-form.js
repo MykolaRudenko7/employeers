@@ -2,9 +2,6 @@ import { Component } from "react";
 
 import "./employeers-add-form.scss";
 
-
-
-
 class EmployeersAddForm extends Component {
   constructor(props) {
     super(props);
@@ -24,9 +21,6 @@ class EmployeersAddForm extends Component {
     });
   };
 
-  //
-  //
-  //
   //   метод бере подію надсилання
   onSubmit = (e) => {
     // відміняю перезагрузку
@@ -39,8 +33,6 @@ class EmployeersAddForm extends Component {
       salary: "",
     });
   };
-  //
-  //
   //
 
   render() {
