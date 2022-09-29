@@ -1,4 +1,4 @@
-import "./employeers-list-item.css";
+import "./employeers-list-item.scss";
 
 const EmployeersListItem = (props) => {
   const {
@@ -27,6 +27,12 @@ const EmployeersListItem = (props) => {
         // якщо клік на ім'я, то визиваю ф-цію
         onClick={onToggleProp}
         data-toggle="rise"
+
+		//   інлайн стилі приймають об'єкт
+		// якщо одиниця виміру без величини, то за замовчуванням px
+		//   style={{fontSize: 20}}
+
+		  style={{fontSize: '1rem'}}
       >
         {name}
       </span>

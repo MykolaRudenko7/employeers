@@ -1,8 +1,7 @@
 import EmployeersListItem from "../employeers-list-item/employeers-list-item";
-import "./employeers-list.css";
-//
-//
-//
+
+import "./employeers-list.scss";
+
 // тут я уже показую відфільтровану дату
 const EmployeersList = ({ data, onDelete, onToggleProp }) => {
   const elements = data.map((item) => {

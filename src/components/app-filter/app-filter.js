@@ -1,4 +1,4 @@
-import "./app-filter.css";
+import "./app-filter.scss";
 
 // класу і стану не буде, бо на кнопку нажали і вона виконала дію, стан не треба
 const AppFilter = (props) => {
